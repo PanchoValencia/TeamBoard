@@ -9,6 +9,7 @@ import { TextInput } from '../../Components/TextInput/TextInput'
 import { Button } from '../../Components/Button/Button'
 import { Select } from '../../Components/Select/Select'
 import { useUserStore } from '../../Store/UsersStore'
+import { mapToStatus } from '../../TeamBoard.utils'
 
 const ManageCardModalFooter = styled.div`
     display: flex;
@@ -27,9 +28,10 @@ export const ManageCardModal: React.FC<ManageCardModalProps> = ({ cardId }) => {
     const currentCard = cards.find((card: Card) => card.id === cardId)
     const isEdit = Boolean(currentCard);
 
-    const [title, setTitle] = React.useState(currentCard?.title || '')
-    const [description, setDescription] = React.useState(currentCard?.description || '')
-    const [assignee, setAssignee] = React.useState(currentCard?.assignee || users[0]?.id)
+    const [title, setTitle] = React.useState<string>(currentCard?.title || '')
+    const [description, setDescription] = React.useState<string>(currentCard?.description || '')
+    const [assignee, setAssignee] = React.useState<string>(currentCard?.assignee || users[0]?.id)
+    const [status, setStatus] = React.useState<CardStatus>(currentCard?.status || CardStatus.ToDo)
 
     const isDisabled = React.useMemo(() => {
         return !title || !description || !assignee;
@@ -41,9 +43,8 @@ export const ManageCardModal: React.FC<ManageCardModalProps> = ({ cardId }) => {
                 id: currentCard!.id,
                 title,
                 description,
-                status: currentCard!.status,
+                status,
                 assignee,
-                dueDate: currentCard!.dueDate,
                 createdAt: currentCard!.createdAt,
             })
         } else {
@@ -65,6 +66,11 @@ export const ManageCardModal: React.FC<ManageCardModalProps> = ({ cardId }) => {
                 <Stack>
                     <TextInput label="Title" value={title} onChange={setTitle} placeholder="Add title" />
                     <TextInput label="Description" value={description} onChange={setDescription} placeholder="Add description" />
+                    {
+                        isEdit ? (
+                            <Select label="Status" value={status} onChange={setStatus} options={Object.values(CardStatus).map((status) => ({ label: mapToStatus[status], value: status }))} />
+                        ) : null
+                    }
                     <Select label="Assignee" value={assignee} onChange={(value) => setAssignee(value)} options={users.map((user) => ({ label: user.name, value: user.id }))} />
                 </Stack>
                 <ManageCardModalFooter>

@@ -1,10 +1,11 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { CardStatus } from '../../TeamBoard.types'
+import { CardStatus, ModalIds } from '../../TeamBoard.types'
 import { useCardStore } from '../../Store/CardsStore'
 import { useSelectedUserStore } from '../../Store/UsersStore'
 import { useGlobalStore } from '../../Store/GlobalStore'
 import { CardComponent } from '../../Components/Card/Card'
+import { mapToStatus } from '../../TeamBoard.utils'
 
 const ColumnBoardContainer = styled.div`
     display: flex;
@@ -23,6 +24,7 @@ const ColumnBoardHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
+    border-bottom: 2px solid var(--border);
 `;
 
 const ColumnBoardTitle = styled.h2`
@@ -42,17 +44,10 @@ interface ColumnBoardProps {
     readonly status: CardStatus;
 }
 
-const mapToStatus: Record<CardStatus, string> = {
-    [CardStatus.ToDo]: 'To Do',
-    [CardStatus.InProgress]: 'In Progress',
-    [CardStatus.InReview]: 'In Review',
-    [CardStatus.Done]: 'Done',
-}
-
 export const ColumnBoard: React.FC<ColumnBoardProps> = ({ status }) => {
     const {cards} = useCardStore()
     const {selectedUsers} = useSelectedUserStore()
-    const {searchQuery} = useGlobalStore()
+    const {searchQuery, openModal} = useGlobalStore()
 
     const filteredCards = React.useMemo(() => {
         if (!selectedUsers.length && !searchQuery) {
@@ -73,6 +68,10 @@ export const ColumnBoard: React.FC<ColumnBoardProps> = ({ status }) => {
         return filteredCards.filter((card) => card.status === status)
     }, [filteredCards, status]);
 
+    const handleOpenCard = (cardId: string) => {
+        openModal(ModalIds.addCard, { cardId })
+    }
+
     return (
         <ColumnBoardContainer>
             <ColumnBoardHeader>
@@ -81,7 +80,7 @@ export const ColumnBoard: React.FC<ColumnBoardProps> = ({ status }) => {
             <ColumnBoardBody>
                 {
                     cardsForThisColumn.map((card) => (
-                        <CardComponent key={card.id} card={card} />
+                        <CardComponent key={card.id} card={card} onClick={() => handleOpenCard(card.id)} />
                     ))
                 }
             </ColumnBoardBody>

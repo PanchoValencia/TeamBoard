@@ -4,7 +4,7 @@ import { Stack } from '../Stack/Stack'
 
 const TextInputLabel = styled.label`
     font-size: 1rem;
-    color: var(--form-text);
+    color: var(--foreground);
 `;
 
 const TextInputInput = styled.input`
@@ -14,22 +14,22 @@ const TextInputInput = styled.input`
     color: var(--form-text);
     font-size: 1rem;
     border: 1px solid var(--border);
-    background-color: var(--background-form);
+    background-color: var(--form-background);
     outline: none;
 `;
 
-interface TextInputProps {
+interface TextInputInterface extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
     readonly label: string
     readonly value: string
     readonly placeholder?: string
     readonly onChange: (value: string) => void
 }
 
-export const TextInput: React.FC<TextInputProps> = ({ label, value, onChange, placeholder }) => {
+export const TextInput: React.FC<TextInputInterface> = ({ label, value, onChange, placeholder, ...htmlProps }) => {
     return (
         <Stack space="small">
             <TextInputLabel>{label}</TextInputLabel>
-            <TextInputInput type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+            <TextInputInput value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} {...htmlProps} />
         </Stack>
     )
 }

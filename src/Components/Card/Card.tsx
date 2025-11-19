@@ -31,14 +31,15 @@ const CardDescription = styled.p`
 
 interface CardProps {
     readonly card: Card
+    readonly onClick: () => void
 }
 
-export const CardComponent: React.FC<CardProps> = ({ card }) => {
+export const CardComponent: React.FC<CardProps> = ({ card, onClick }) => {
     const {users} = useUserStore()
     const user = users.find((user) => user.id === card.assignee)
 
     return (
-        <CardContainer>
+        <CardContainer onClick={onClick}>
             <div>
                 <CardTitle>{card.title}</CardTitle>
                 <CardDescription>{card.description?.trim() || 'No description'}</CardDescription>

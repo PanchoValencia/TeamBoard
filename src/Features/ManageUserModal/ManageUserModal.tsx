@@ -32,9 +32,10 @@ export const ManageUserModal: React.FC<ManageUserModalProps> = ({ userId }) => {
     const currentUser = users.find((user: User) => user.id === userId)
     const isEdit = Boolean(currentUser);
 
-    const [name, setName] = React.useState(currentUser?.name || '')
-    const [email, setEmail] = React.useState(currentUser?.email || '')
-    const [role, setRole] = React.useState(currentUser?.role || Roles.member)
+    const [name, setName] = React.useState<string>(currentUser?.name || '')
+    const [email, setEmail] = React.useState<string>(currentUser?.email || '')
+    const [role, setRole] = React.useState<Roles>(currentUser?.role || Roles.member)
+    const [password, setPassword] = React.useState<string>(currentUser?.password || '')
     
     const isDisabled = React.useMemo(() => {
         return !name || !email || !role;
@@ -47,6 +48,7 @@ export const ManageUserModal: React.FC<ManageUserModalProps> = ({ userId }) => {
                 name,
                 email,
                 role,
+                password: currentUser!.password,
             })
         } else {
             addUser({
@@ -54,6 +56,7 @@ export const ManageUserModal: React.FC<ManageUserModalProps> = ({ userId }) => {
                 name,
                 email,
                 role,
+                password,
             })
         }
         closeModal()
@@ -65,6 +68,7 @@ export const ManageUserModal: React.FC<ManageUserModalProps> = ({ userId }) => {
                 <Stack>
                     <TextInput label="Name" value={name} onChange={setName} placeholder="Add name" />
                     <TextInput label="Email" value={email} onChange={setEmail} placeholder="Add email" />
+                    <TextInput label="Password" type="password" value={password} onChange={setPassword} placeholder="Add password" />
                     <Select label="Role" value={role} onChange={(value) => setRole(value as Roles)} options={roleOptions} />
                 </Stack>
                 <ManageUserModalFooter>

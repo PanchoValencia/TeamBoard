@@ -16,13 +16,13 @@ export interface Card {
     readonly description?: string,
     readonly status: CardStatus,
     readonly assignee: string,
-    readonly dueDate?: Date,
     readonly createdAt: Date,
 }
 
 export interface User {
     readonly id: string,
     readonly name: string,
+    readonly password: string,
     readonly email: string,
     readonly role: Roles,
 }

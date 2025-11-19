@@ -19,7 +19,7 @@ const SelectButton = styled.button<{ $isOpen: boolean }>`
     color: var(--form-text);
     font-size: 1rem;
     border: 1px solid var(--border);
-    background-color: var(--background-form);
+    background-color: var(--form-background);
     outline: none;
     cursor: pointer;
     display: flex;
@@ -86,7 +86,7 @@ const DropdownItem = styled.li<{ $isSelected: boolean; $isFirst?: boolean; $isLa
 interface SelectProps {
     readonly label: string
     readonly value: any
-    readonly onChange: (value: string) => void
+    readonly onChange: (value: any) => void
     readonly options: Array<{ label: string, value: any }>
 }
 
