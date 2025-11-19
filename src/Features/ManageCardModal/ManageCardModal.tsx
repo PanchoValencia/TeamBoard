@@ -74,8 +74,8 @@ export const ManageCardModal: React.FC<ManageCardModalProps> = ({ cardId }) => {
                     <Select label="Assignee" value={assignee} onChange={(value) => setAssignee(value)} options={users.map((user) => ({ label: user.name, value: user.id }))} />
                 </Stack>
                 <ManageCardModalFooter>
-                    <Button forceLightColor onClick={closeModal}>Cancel</Button>
-                    <Button forceLightColor onClick={handleSave} isDisabled={isDisabled}>Save</Button>
+                    <Button onClick={closeModal}>Cancel</Button>
+                    <Button onClick={handleSave} isDisabled={isDisabled}>Save</Button>
                 </ManageCardModalFooter>
             </Stack>
         </FormWrapper>

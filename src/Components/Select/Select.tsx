@@ -4,7 +4,7 @@ import { Stack } from '../Stack/Stack'
 
 const SelectLabel = styled.label`
     font-size: 1rem;
-    color: var(--form-text);
+    color: var(--foreground);
 `;
 
 const SelectContainer = styled.div`
@@ -16,10 +16,10 @@ const SelectButton = styled.button<{ $isOpen: boolean }>`
     height: 40px;
     border-radius: 5px;
     padding: 0 1rem;
-    color: var(--form-text);
+    color: var(--foreground);
     font-size: 1rem;
     border: 1px solid var(--border);
-    background-color: var(--form-background);
+    background-color: var(--background-secondary);
     outline: none;
     cursor: pointer;
     display: flex;
@@ -48,7 +48,7 @@ const DropdownList = styled.ul<{ $isOpen: boolean; $openUpward: boolean }>`
     ${props => props.$openUpward ? 'bottom: 100%;' : 'top: 100%;'}
     left: 0;
     right: 0;
-    background-color: var(--secondary);
+    background-color: var(--background-secondary);
     border: 1px solid var(--border);
     border-radius: 5px;
     ${props => props.$openUpward ? 'border-bottom: none; border-bottom-left-radius: 0; border-bottom-right-radius: 0;' : 'border-top: none; border-top-left-radius: 0; border-top-right-radius: 0;'}
@@ -64,8 +64,8 @@ const DropdownList = styled.ul<{ $isOpen: boolean; $openUpward: boolean }>`
 const DropdownItem = styled.li<{ $isSelected: boolean; $isFirst?: boolean; $isLast?: boolean }>`
     padding: 0.75rem 1rem;
     cursor: pointer;
-    color: var(--form-text);
-    background-color: ${props => props.$isSelected ? 'var(--primary)' : 'var(--secondary)'};
+    color: var(--foreground);
+    background-color: ${props => props.$isSelected ? 'var(--primary)' : 'var(--background-secondary)'};
     z-index: 100000000;
 
     &:hover {

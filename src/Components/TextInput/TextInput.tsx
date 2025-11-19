@@ -11,10 +11,10 @@ const TextInputInput = styled.input`
     height: 40px;
     border-radius: 5px;
     padding: 1rem;
-    color: var(--form-text);
+    color: var(--foreground);
     font-size: 1rem;
     border: 1px solid var(--border);
-    background-color: var(--form-background);
+    background-color: var(--background-secondary);
     outline: none;
 `;
 

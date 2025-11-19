@@ -72,8 +72,8 @@ export const ManageUserModal: React.FC<ManageUserModalProps> = ({ userId }) => {
                     <Select label="Role" value={role} onChange={(value) => setRole(value as Roles)} options={roleOptions} />
                 </Stack>
                 <ManageUserModalFooter>
-                    <Button forceLightColor onClick={closeModal}>Cancel</Button>
-                    <Button forceLightColor onClick={handleSave} isDisabled={isDisabled}>Save</Button>
+                    <Button onClick={closeModal}>Cancel</Button>
+                    <Button onClick={handleSave} isDisabled={isDisabled}>Save</Button>
                 </ManageUserModalFooter>
             </Stack>
         </FormWrapper>

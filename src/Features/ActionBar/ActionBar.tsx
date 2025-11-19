@@ -8,7 +8,8 @@ import { useGlobalStore } from '../../Store/GlobalStore'
 import { Button } from '../../Components/Button/Button'
 import { Switch } from '../../Components/Switch/Switch'
 import { useThemeStore } from '../../Store/ThemeStore'
-import { ModalIds } from '../../TeamBoard.types'
+import { ModalIds, Roles } from '../../TeamBoard.types'
+import { useAuthenticationStore } from '../../Store/AuthenticationStore'
 
 const ActionBarContainer = styled.div`
     display: flex;
@@ -41,6 +42,9 @@ export const ActionBar: React.FC = () => {
     const {searchQuery, setSearchQuery, openModal} = useGlobalStore()
     const {selectedUsers, selectUsers} = useSelectedUserStore()
     const {theme, setTheme} = useThemeStore()
+    const {authenticatedUser} = useAuthenticationStore()
+
+    const isAdmin = authenticatedUser?.role === Roles.admin
 
     const handleAddUser = () => {
         openModal(ModalIds.addUser, {})
@@ -69,7 +73,9 @@ export const ActionBar: React.FC = () => {
                 </AvatarsContainer>
             </ActionBarItem>
             <ActionBarItem>
-                <Button onClick={handleAddUser} >Add User</Button>
+                {isAdmin ? (
+                    <Button onClick={handleAddUser} >Add User</Button>
+                ) : null}
                 <Button onClick={handleAddCard}>Add Card</Button>
                 <Switch label="Dark Mode" onChange={setTheme} isChecked={theme === 'dark'} />
             </ActionBarItem>

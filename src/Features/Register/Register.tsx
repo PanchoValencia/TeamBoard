@@ -26,7 +26,7 @@ const RegisterCard = styled(Stack)`
     padding: 1rem;
     border-radius: 5px;
     background-color: var(--background-secondary);
-    color: var(--form-text);
+    color: var(--foreground);
     min-width: 400px;
 `;
 

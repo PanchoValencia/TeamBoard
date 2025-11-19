@@ -46,6 +46,7 @@ export const Profile: React.FC = () => {
                 <ProfileDetails space="small">
                     <p>{authenticatedUser?.name}</p>
                     <p>{authenticatedUser?.email}</p>
+                    <p>{authenticatedUser?.role}</p>
                     <LinkComponent onClick={logout}>Logout</LinkComponent>
                 </ProfileDetails>
             )}

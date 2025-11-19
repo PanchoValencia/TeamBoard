@@ -8,8 +8,8 @@ const FormWrapperContainer = styled.div`
     width: 100%;
     max-width: 600px;
     margin: 0 20px;
-    background-color: var(--form-background);
-    color: var(--form-text);
+    background-color: var(--background-secondary);
+    color: var(--foreground);
     opacity: none;
     border-radius: 5px;
     padding: 0 1rem 1rem;
@@ -24,7 +24,7 @@ const Title = styled.h2`
     z-index: 100000000;
     padding: 1rem;
     border-bottom: 1px solid var(--border);
-    background-color: var(--form-background);
+    color: var(--foreground);
 `;
 
 interface FormWrapperProps {
