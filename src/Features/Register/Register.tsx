@@ -91,8 +91,8 @@ export const Register: React.FC = () => {
                     <TextInput label="Password" type="password" value={password} onChange={setPassword} placeholder="Enter password" />
                     <Select label="Role" value={role} onChange={(value: Roles) => setRole(Roles[value])} options={Object.values(Roles).map((role) => MapToRoleOptions[role])} />
                 </Stack>
-                <Button onClick={handleRegister} isDisabled={disableRegister} forceLightColor>Register</Button>
-                <Button onClick={() => navigate(ROUTES.login)} forceLightColor>Login</Button>
+                <Button onClick={handleRegister} isDisabled={disableRegister}>Register</Button>
+                <Button onClick={() => navigate(ROUTES.login)}>Login</Button>
             </RegisterCard>
         </RegisterContainer>
     )

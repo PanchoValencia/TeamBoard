@@ -75,8 +75,8 @@ export const Login: React.FC = () => {
                     <TextInput label="Email" value={email} onChange={setEmail} placeholder="Enter email" />
                     <TextInput label="Password" type="password" value={password} onChange={setPassword} placeholder="Enter password" />
                 </Stack>
-                <Button onClick={handleLogin} isDisabled={disableLogin} forceLightColor>Login</Button>
-                <Button onClick={() => navigate(ROUTES.register)} forceLightColor>Register</Button>
+                <Button onClick={handleLogin} isDisabled={disableLogin}>Login</Button>
+                <Button onClick={() => navigate(ROUTES.register)}>Register</Button>
             </LoginCard>
         </LoginContainer>
 
